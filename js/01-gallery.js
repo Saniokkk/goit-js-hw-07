@@ -45,6 +45,7 @@ function onOpenImage(event) {
             return;
         };
         imgOnModal.close();
+        document.removeEventListener('keydown', closeModalEsc);
     }
 }
 
