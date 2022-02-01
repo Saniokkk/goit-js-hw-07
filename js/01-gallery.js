@@ -1,3 +1,4 @@
+
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
@@ -32,21 +33,21 @@ function onOpenImage(event) {
     if (event.target.nodeName !== "IMG") {
     return;
     }
+
+    const options = {
+        onShow: () => { document.addEventListener('keydown', closeModalEsc) },
+        onClose: () => {document.removeEventListener('keydown', closeModalEsc)}
+    }
     const url = event.target.dataset.source;
     const imgOnModal = basicLightbox.create(`
-    <img width="1280" height="854" src="${url}"/>`);
+    <img width="1280" height="854" src="${url}"/>`, options);
 
-    imgOnModal.show();    
-    
-    document.addEventListener('keydown', closeModalEsc);
+    imgOnModal.show();
 
     function closeModalEsc(event) {
         if (event.code !== 'Escape') {
             return;
         };
         imgOnModal.close();
-        document.removeEventListener('keydown', closeModalEsc);
     }
 }
-
-
